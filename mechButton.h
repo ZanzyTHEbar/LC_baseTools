@@ -3,6 +3,7 @@
 
 #include <idlers.h>
 #include <timeObj.h>
+#include <functional>
 
 //****************************************************************************************
 // Mechanical button de-bouncer.
@@ -20,25 +21,27 @@
 // But then, you're a pro. So I shouldn't have to tell you that.
 //****************************************************************************************
 
-class mechButton :  public idler {
+class mechButton : public idler
+{
+protected:
+        timeObj mTimer;
+        bool beenInitialized;
+        void (*callback)(void);
+        byte pinNum;
+        byte checkNum;
+        byte setAs;
+        typedef std::function<void (void)> funct_callback_t;
+        funct_callback_t mCallback;
 
-  public:
-            mechButton(byte inPinNum);
-    virtual ~mechButton(void);
+public:
+        mechButton(byte inPinNum);
+        virtual ~mechButton(void);
 
-            bool    trueFalse(void);                       // Read current state.
-            void    setCallback(void(*funct)(void));       // Or use a callback for changed state.
-    virtual void    takeAction(void);                      // Something for the Pro's to inherit.
-    virtual void    idle();
-
-    protected:
-                timeObj mTimer;
-                bool    beenInitialized;
-                void    (*callback)(void);
-                byte    pinNum;
-                byte    checkNum;
-                byte    setAs;
+        bool trueFalse(void);                  // Read current state.
+        void setCallback(void (*funct)(void)); // Or use a callback for changed state.
+        void setCallback(funct_callback_t funct);
+        virtual void takeAction(void); // Something for the Pro's to inherit.
+        virtual void idle();
 };
 
 #endif
-
