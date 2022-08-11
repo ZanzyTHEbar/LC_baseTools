@@ -75,11 +75,13 @@ void mechButton::setCallback(void (*funct)(void))
     hookup();
 }
 
+#ifdef __cplusplus
 void mechButton::setCallback(funct_callback_t funct)
 {
     mCallback = funct;
     hookup();
 }
+#endif // __cplusplus
 
 // If one would like to inherit this and have a call to fill out for action.. This is it!
 // Doesn't actually do anything in the base class.
@@ -89,4 +91,3 @@ void mechButton::takeAction(void) {}
 // callback has been set to deal with state change on the switch. Otherwise this will do
 // basically nothing. As the return value of trueFalse() is being ignored.
 void mechButton::idle(void) { trueFalse(); }
-
