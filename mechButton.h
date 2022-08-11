@@ -30,16 +30,20 @@ protected:
         byte pinNum;
         byte checkNum;
         byte setAs;
+#ifdef __cplusplus
         typedef std::function<void (void)> funct_callback_t;
         funct_callback_t mCallback;
-
+#endif // __cplusplus
 public:
         mechButton(byte inPinNum);
         virtual ~mechButton(void);
 
         bool trueFalse(void);                  // Read current state.
         void setCallback(void (*funct)(void)); // Or use a callback for changed state.
+#ifdef __cplusplus
         void setCallback(funct_callback_t funct);
+#endif // __cplusplus
+        
         virtual void takeAction(void); // Something for the Pro's to inherit.
         virtual void idle();
 };
