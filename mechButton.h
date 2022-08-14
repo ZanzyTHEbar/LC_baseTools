@@ -40,9 +40,7 @@ public:
 
         bool trueFalse(void);                  // Read current state.
         void setCallback(void (*funct)(void)); // Or use a callback for changed state.
-#ifdef __cplusplus
         void setCallback(funct_callback_t funct);
-#endif // __cplusplus
         
         virtual void takeAction(void); // Something for the Pro's to inherit.
         virtual void idle();
