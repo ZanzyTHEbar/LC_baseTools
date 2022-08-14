@@ -30,10 +30,8 @@ protected:
         byte pinNum;
         byte checkNum;
         byte setAs;
-#ifdef __cplusplus
         typedef std::function<void (void)> funct_callback_t;
         funct_callback_t mCallback;
-#endif // __cplusplus
 public:
         mechButton(byte inPinNum);
         virtual ~mechButton(void);
